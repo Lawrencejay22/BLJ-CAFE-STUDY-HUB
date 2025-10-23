@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BLJ Study Hub & Cafe - Inventory</title>
+  <link rel="stylesheet" href="Inventory.css">
+</head>
+<body>
+  <header>
+    BLJ Study Hub & Cafe
+    <p>Comprehensive Inventory Management System</p>
+  </header>
+
+  <div class="container">
+    <h2>Inventory Management</h2>
+
+    <form id="inventoryForm">
+      <h3>Add New Item</h3>
+
+      <div class="form-row">
+        <input type="text" id="itemName" placeholder="Item Name *" required>
+        <select id="category" required>
+          <option value="">Select Category</option>
+          <option value="Beverage">Beverage</option>
+          <option value="Snack">Snack</option>
+          <option value="Stationery">Stationery</option>
+          <option value="Other">Other</option>
+        </select>
+        <input type="number" id="quantity" placeholder="Quantity *" required>
+        <input type="number" id="unitPrice" placeholder="Unit Price (₱)" required>
+      </div>
+
+      <div class="form-row">
+        <input type="number" id="reorderLevel" placeholder="Reorder Level *" required>
+        <input type="text" id="supplier" placeholder="Supplier">
+      </div>
+
+      <div class="form-row">
+        <textarea id="notes" placeholder="Additional information about the item"></textarea>
+      </div>
+
+      <button type="button" class="save-btn" onclick="addItem()">💾 SAVE ITEM</button>
+      <button type="reset" class="reset-btn">↺ RESET FORM</button>
+    </form>
+
+    <div class="controls">
+      <input type="text" id="searchBar" placeholder="Search items..." onkeyup="searchItem()">
+      <select id="filterStatus" onchange="filterStatus()">
+        <option value="all">All Stock Levels</option>
+        <option value="Critical">Critical</option>
+        <option value="Almost">Almost</option>
+        <option value="Available">Available</option>
+        <option value="Surplus">Surplus</option>
+      </select>
+    </div>
+
+    <table id="inventoryTable">
+      <thead>
+        <tr>
+          <th>Item Name</th>
+          <th>Category</th>
+          <th>Quantity</th>
+          <th>Unit Price</th>
+          <th>Total Value</th>
+          <th>Status</th>
+          <th>Supplier</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+        <tr><td colspan="7" class="empty-message">📦 No Items in Inventory<br><small>Add your first item to get started</small></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <script src="Inventry.js"></script>
+</body>
+</html>

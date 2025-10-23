@@ -1,0 +1,155 @@
+/* ======= General Layout ======= */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #5b6cf0, #6a4cf3);
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+header {
+  background: #1a2b49;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  font-size: 1.6rem;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+header p {
+  font-size: 0.9rem;
+  margin: 0.2rem 0 0;
+  opacity: 0.8;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 2rem auto;
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* ======= Form Section ======= */
+form {
+  background: #f9fbfe;
+  border: 1px solid #dee3f0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+form h3 {
+  margin-top: 0;
+  color: #1a2b49;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 1rem;
+}
+
+.form-row input,
+.form-row select,
+textarea {
+  flex: 1;
+  padding: 0.6rem 0.8rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  min-width: 200px;
+  font-size: 0.9rem;
+}
+
+textarea {
+  width: 100%;
+  min-height: 70px;
+  resize: vertical;
+}
+
+button {
+  padding: 0.5rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-right: 10px;
+  color: white;
+  transition: 0.3s;
+}
+
+.save-btn {
+  background: #2e7dff;
+}
+
+.save-btn:hover {
+  background: #1759cc;
+}
+
+.reset-btn {
+  background: #adb5bd;
+}
+
+.reset-btn:hover {
+  background: #868e96;
+}
+
+/* ======= Search & Filter ======= */
+.controls {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.controls input,
+.controls select {
+  padding: 0.6rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+/* ======= Table Styling ======= */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+th, td {
+  padding: 0.8rem;
+  text-align: center;
+  border-bottom: 1px solid #dee2e6;
+}
+
+th {
+  background: #1a2b49;
+  color: white;
+}
+
+tr:hover {
+  background: #f1f4ff;
+}
+
+.empty-message {
+  text-align: center;
+  padding: 2rem;
+  color: #6c757d;
+  font-size: 0.95rem;
+}
+
+.status {
+  border-radius: 20px;
+  padding: 0.3rem 0.8rem;
+  color: white;
+  font-weight: 600;
+}
+
+.status.Critical { background: #e63946; }
+.status.Almost { background: #ff9f1c; }
+.status.Available { background: #2ec4b6; }
+.status.Surplus { background: #4361ee; }
