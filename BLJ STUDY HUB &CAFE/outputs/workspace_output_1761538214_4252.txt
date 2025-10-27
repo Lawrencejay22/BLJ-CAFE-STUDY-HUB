@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - BLJ Study Hub & Cafe</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Chart.js for Analytics -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <!-- Load Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fc;
+        }
+
+        /* Base Admin Layout */
+        .admin-page {
+            display: flex;
+            min-height: 100vh;
+            padding-top: 64px; /* Space for fixed header */
+        }
+
+        /* Navigation Bar (Fixed Header) */
+        .admin-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            height: 64px;
+            background-color: #ffffff;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1.5rem;
+        }
+        .admin-nav-brand h1 { font-size: 1.25rem; font-weight: 700; color: #3b82f6; }
+        .admin-nav-user { display: flex; align-items: center; gap: 1rem; }
+        .logout-btn {
+            background-color: #ef4444;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: background-color 0.2s;
+        }
+        .logout-btn:hover { background-color: #dc2626; }
+
+        /* Sidebar */
+        .admin-sidebar {
+            width: 256px; /* 64 */
+            flex-shrink: 0;
+            background-color: #1e293b;
+            color: #e2e8f0;
+            padding-top: 1rem;
+            position: fixed;
+            height: calc(100% - 64px);
+            overflow-y: auto;
+            left: 0;
+        }
+        .sidebar-menu { list-style: none; padding: 0; }
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s;
+            position: relative;
+        }
+        .menu-item:hover { background-color: #334155; color: #ffffff; }
+        .menu-item.active { background-color: #3b82f6; color: #ffffff; border-right: 4px solid #f97316; }
+        .menu-item i { margin-right: 0.75rem; width: 1.25rem; text-align: center; }
+        .badge {
+            background-color: #f97316;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.1rem 0.5rem;
+            border-radius: 9999px;
+            margin-left: auto;
+        }
+
+        /* Main Content */
+        .admin-main {
+            flex-grow: 1;
+            padding: 2rem;
+            margin-left: 256px; /* Match sidebar width */
+        }
+        .admin-section { display: none; }
+        .admin-section.active { display: block; }
+
+        /* General Components */
+        .section-header {
+            display: flex;
+            justify-content: space-between;

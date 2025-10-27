@@ -1,0 +1,55 @@
+.
+├── 001.jpg
+├── BLJ Study hub & Cafe.html
+├── INTEGRATION_GUIDE.md
+├── PROJECT_SUMMARY.md
+├── README.md
+├── SETUP_GUIDE.md
+├── Tazzina_di_caffe_a_Ventimiglia.jpg
+├── admin-login-updated.html
+├── admin-login.html
+├── admin-login.php
+├── admin-panel.html
+├── admin-script.js
+├── admin-styles.css
+├── api
+│   ├── admin
+│   │   ├── bookings.php
+│   │   ├── dashboard.php
+│   │   ├── orders.php
+│   │   ├── products.php
+│   │   └── users.php
+│   └── user
+│       ├── cart.php
+│       ├── messages.php
+│       └── notifications.php
+├── auth.js
+├── config
+│   └── database.php
+├── database
+│   └── schema.sql
+├── file_structure.txt
+├── homepage.html
+├── homepage.html.html
+├── homepage_backup.html
+├── includes
+│   └── auth.php
+├── install.php
+├── logout.php
+├── message platform.html
+├── outputs
+│   ├── workspace_output_1761538183_9089.txt
+│   ├── workspace_output_1761538203_2623.txt
+│   ├── workspace_output_1761538209_2196.txt
+│   ├── workspace_output_1761538214_4252.txt
+│   └── workspace_output_1761539425_9148.txt
+├── register.php
+├── script.js
+├── signin-updated.html
+├── signin.html
+├── signin.php
+├── signout.html
+├── styles.css
+└── todo.md
+
+8 directories, 45 files

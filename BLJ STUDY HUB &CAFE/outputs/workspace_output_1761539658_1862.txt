@@ -1,0 +1,24 @@
+-rw-r--r-- 1 root root  43234 Oct 27 04:08 BLJ Study hub & Cafe.html
+-rw-r--r-- 1 root root  12053 Oct 27 04:33 DELIVERABLES.md
+-rw-r--r-- 1 root root  11082 Oct 27 04:31 DEPLOYMENT_CHECKLIST.md
+-rw-r--r-- 1 root root  12733 Oct 27 04:27 INTEGRATION_GUIDE.md
+-rw-r--r-- 1 root root  11062 Oct 27 04:28 PROJECT_SUMMARY.md
+-rw-r--r-- 1 root root   3138 Oct 27 04:34 QUICK_REFERENCE.md
+-rw-r--r-- 1 root root  11659 Oct 27 04:23 README.md
+-rw-r--r-- 1 root root   3868 Oct 27 04:23 SETUP_GUIDE.md
+-rw-r--r-- 1 root root   7777 Oct 27 04:25 admin-login-updated.html
+-rw-r--r-- 1 root root   3490 Oct 27 04:08 admin-login.html
+-rw-r--r-- 1 root root   1509 Oct 27 04:16 admin-login.php
+-rw-r--r-- 1 root root  43753 Oct 27 04:08 admin-panel.html
+-rw-r--r-- 1 root root   8175 Oct 27 04:08 homepage.html
+-rw-r--r-- 1 root root   6318 Oct 27 04:08 homepage.html.html
+-rw-r--r-- 1 root root   6318 Oct 27 04:08 homepage_backup.html
+-rw-r--r-- 1 root root   9154 Oct 27 04:26 install.php
+-rw-r--r-- 1 root root    489 Oct 27 04:16 logout.php
+-rw-r--r-- 1 root root  14817 Oct 27 04:08 message platform.html
+-rw-r--r-- 1 root root   1889 Oct 27 04:17 register.php
+-rw-r--r-- 1 root root  11673 Oct 27 04:24 signin-updated.html
+-rw-r--r-- 1 root root   9544 Oct 27 04:08 signin.html
+-rw-r--r-- 1 root root   1307 Oct 27 04:13 signin.php
+-rw-r--r-- 1 root root   7238 Oct 27 04:08 signout.html
+-rw-r--r-- 1 root root   1237 Oct 27 04:25 todo.md
