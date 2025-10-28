@@ -1,0 +1,3737 @@
+@import url('https://fonts.googleapis.com/css2?family=Arial:wght@400;700&display=swap');
+
+/*=====================================
+  0. CSS VARIABLES & THEME MANAGEMENT
+=====================================*/
+
+/* CSS Variables for Theme Management */
+:root {
+    --text-color-light: #333;
+    --bg-color-light: #f4f4f4;
+    --dropdown-bg-light: #ffffff;
+    --border-color-light: #e0e0e0;
+    --header-border-light: #ddd;
+    --unread-bg-light: #f0f8ff;
+    --badge-color: #ff4545;
+    --action-color: #4c8cff;
+    --hover-bg-light: #f5f5f5;
+}
+
+body.dark-mode {
+    --text-color-dark: #e0e0e0;
+    --bg-color-dark: #121212;
+    --dropdown-bg-dark: #242424;
+    --border-color-dark: #444;
+    --header-border-dark: #333;
+    --unread-bg-dark: #2c2c34;
+    --hover-bg-dark: #333333;
+}
+
+/*=====================================
+  1. GLOBAL RESET & BASE STYLES
+=====================================*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 15px;
+}
+
+body {
+    font-family: 'Poppins', 'Arial', sans-serif;
+    line-height: 1.6;
+    /* Transition applied to text color and background changes */
+    transition: color 0.5s ease; 
+    min-height: 100vh;
+    
+    /* Background Image Setup: Using an available image (image_815a1f.jpg) */
+    background-image: url(001.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    /* Default Text Styles (for contrast against the dark default overlay) */
+    color: var(--text-color-dark);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8); /* Dark shadow for contrast */
+}
+/* =========================================================
+ * 3. TYPOGRAPHY & INTERACTION
+ * ========================================================= */
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+a:hover {
+    color: #22ffff; /* Lighter neon blue on hover */
+    text-decoration: none;
+}
+/*=====================================
+  2. BACKGROUND OVERLAY & BLUR EFFECTS
+=====================================*/
+/* Background Overlay (fixed position to cover the image and apply blur) */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Keep the overlay behind all content */
+    transition: all 0.5s ease; /* Smooth transition for color and blur */
+}
+
+/* --- Dark Mode (Default / When class 'dark-mode' is applied) --- */
+body:not(.light-mode) {
+    color: var(--text-color-dark); /* White/Light text */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+body:not(.light-mode)::before {
+    /* Dark, highly blurred overlay */
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+}
+
+/* --- Light Mode (When class 'light-mode' is applied) --- */
+body.light-mode {
+    color: var(--text-color-light); /* Dark text */
+    text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.8); /* Light shadow for contrast */
+}
+
+body.light-mode::before {
+    /* Light, less blurred overlay */
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+/*=====================================
+  3. DARK MODE THEME
+=====================================*/
+body.dark-mode {
+    color: #e0e0e0;
+}
+
+body.dark-mode::before {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+body.dark-mode .settings-card,
+body.dark-mode .profile-card {
+    background-color: #333;
+    border: 1px solid #555;
+}
+
+body.dark-mode .header-nav {
+    background-color: #2c2c2c;
+    border-bottom: 1px solid #444;
+}
+
+body.dark-mode .coffee-menu-section form,
+body.dark-mode .study-hub-section form {
+    background-color: #2c2c2c;
+    border: 1px solid #444;
+}
+
+body.dark-mode .coffee-menu-section li,
+body.dark-mode .study-hub-section li {
+    color: #ccc;
+}
+
+/*=====================================
+  4. HEADER & NAVIGATION
+=====================================*/
+header{
+ /* Glassmorphism Background */
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.7) 0%, rgba(20, 123, 152, 0.4) 100%);
+    -webkit-backdrop-filter: blur(8px);
+    /* Layout & Positioning - Uses Flexbox for logo/title/icons arrangement */
+    color: #fff;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between; /* Space out the three main elements */
+    align-items: center;
+    width: 100%; 
+    box-sizing: border-box; 
+    position: relative;
+    top: 0;
+    z-index: auto;
+
+    /* Neon Bottom Border & Shadow */
+    border-bottom: 3px solid transparent;
+    border-image: linear-gradient(90deg, 
+        transparent 0%, 
+       rgb(216, 196, 182) 20%, 
+       rgb(216, 196, 182) 50%, 
+       rgb(216, 196, 182)80%, 
+        transparent 100%) 1;
+
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 
+                0 0 60px rgba(0, 247, 238, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    animation: headerGlow 3s ease-in-out infinite alternate;
+}
+
+/* --- Header Left: Brand and Title --- */
+.header-brand {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Space between logo and h1 */
+}
+
+/* --- Logo Wrapper for Border Effect (REQUIRES HTML CHANGE: Wrapper div around <img>) --- */
+.header-brand .logo-wrapper {
+    position: relative; 
+    width: 60px;       
+    height: 60px;      
+    border-radius: 12px;
+    flex-shrink: 0; /* Prevents shrinking on small screens */
+}
+
+/* --- Header Brand/Logo Image --- */
+.header-brand img {
+    /* Sizing & Shape */
+    width: 100%; 
+    height: 100%; 
+    object-fit: contain;
+    border-radius: 12px;
+    padding: 8px;
+    
+    /* Background & Border Setup */
+    background: linear-gradient(135deg, rgba(0, 247, 238, 0.2), rgba(20, 123, 152, 0.2));
+    border: 1px solid transparent;
+    background-clip: padding-box;
+    display: block; 
+
+    /* Animation & Hover */
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    animation: logoPulse 4s ease-in-out infinite;
+}
+
+/* --- Logo Hover Effect --- */
+.header-brand .logo-wrapper:hover img {
+    transform: scale(1.1) rotate(360deg);
+    box-shadow: 0 0 40px rgba(0, 247, 238, 0.8),
+                0 0 80px rgba(0, 247, 238, 0.4),
+                inset 0 0 20px rgba(0, 247, 238, 0.2);
+}
+
+/* --- Logo Rotating Border (Applied to the new wrapper) --- */
+.header-brand .logo-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 15px; 
+    padding: 3px;
+    background: linear-gradient(135deg, #00f7ee, #147b98, #00f7ee);
+    background-size: 200% 200%; 
+    /* Masking for the border effect */
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: borderRotate 3s linear infinite;
+    z-index: -1; 
+}
+
+/* --- Main Title (h1) --- */
+header h1 {
+    font-size: 2.2em;
+    font-weight: 700;
+    margin: 0;
+    white-space: nowrap; 
+    position: relative;
+    z-index: 2; 
+    
+    /* Animated Gradient Text Effect */
+    background: linear-gradient(135deg, #00f7ee 0%, #22ffff 25%, #00f7ee 50%, #22ffff 75%, #00f7ee 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 3s ease-in-out infinite;
+
+    /* Neon Text Glow/Shadow */
+    text-shadow: 0 0 30px rgba(0, 247, 238, 0.5);
+    filter: drop-shadow(0 0 10px rgba(0, 247, 238, 0.3));
+}
+
+/* --- H1 Ghost/Blur Effect (The Neon Haze) --- */
+header h1::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1; 
+    
+    /* Blurred Text Gradient */
+    background: linear-gradient(135deg, rgba(0, 247, 238, 0.3), rgba(34, 255, 255, 0.3));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: blur(10px);
+}
+
+/* --- Header Right: Icon Navigation --- */
+.header-icons {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Spacing between icons */
+    flex-shrink: 0; /* Prevents shrinking on small screens */
+}
+
+/* Style for individual icons (assuming they are anchor tags with class 'icon-link') */
+.header-icons .icon-link {
+    /* Style the Icon Container (e.g., a circle or square with a light glow) */
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 1.2rem;
+    position: relative;
+    
+    /* Neon Glow */
+    box-shadow: 0 0 5px rgba(0, 247, 238, 0.5);
+    transition: all 0.3s ease;
+}
+
+.header-icons .icon-link:hover {
+    /* Stronger hover effect */
+    color: #00f7ee;
+    background: rgba(0, 247, 238, 0.1);
+    box-shadow: 0 0 15px rgba(0, 247, 238, 1), 
+                0 0 30px rgba(34, 255, 255, 0.5);
+    transform: scale(1.1);
+}
+
+/* Badge for notifications */
+.header-icons .badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #ff4d4d; /* Red badge */
+    color: white;
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border-radius: 50%;
+    min-width: 18px;
+    text-align: center;
+    line-height: 1.2;
+    box-shadow: 0 0 8px rgba(255, 77, 77, 0.8);
+    pointer-events: none; /* Ignore click events */
+}
+/* --- Section Title Below Header (e.g., 'Coffee Menu') --- */
+.section-title {
+    /* This style assumes the 'Coffee Menu' title is *outside* the main header but near the top */
+    text-align: center;
+    font-size: 3em;
+    font-weight: 800;
+    margin: 40px 0 20px;
+    white-space: nowrap;
+    position: relative;
+    color: #00f7ee;
+    text-shadow: 0 0 10px rgba(0, 247, 238, 0.7), 
+                 0 0 20px rgba(0, 247, 238, 0.5);
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 4px;
+    background-color: #ffcc00; /* Yellow underline */
+    margin: 5px auto 0;
+    border-radius: 2px;
+    box-shadow: 0 0 5px rgba(255, 204, 0, 0.8);
+}
+
+/* --- Responsiveness for fit --- */
+/* Media query to reduce size on smaller screens (e.g., tablet landscape/small desktop) */
+@media (max-width: 800px) {
+    header {
+        padding: 15px 20px; 
+    }
+    header h1 {
+        font-size: 1.8em; 
+    }
+    .header-brand .logo-wrapper { 
+        width: 50px;
+        height: 50px; 
+    }
+    .header-icons {
+        gap: 8px; /* tighter spacing for icons */
+    }
+    .header-icons .icon-link {
+        width: 28px;
+        height: 28px;
+        font-size: 1rem;
+    }
+}
+
+/* Media query to stack elements on very small screens */
+@media (max-width: 500px) {
+    header {
+        flex-direction: column; /* Stack vertically */
+        align-items: flex-start;
+        gap: 10px;
+        padding: 15px 10px;
+    }
+    .header-brand {
+        width: 100%;
+        justify-content: space-between; /* Keep logo and h1 spaced */
+    }
+    .header-icons {
+        width: 100%;
+        justify-content: flex-end; /* Push icons to the right */
+    }
+    header h1 {
+        font-size: 1.6em; 
+    }
+}
+
+
+/* =====================================================
+ * 5. KEYFRAMES
+ * ===================================================== */
+
+/* Neon Header Pulse */
+@keyframes headerGlow {
+    0% {
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 
+                    0 0 40px rgba(0, 247, 238, 0.1),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+    100% {
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 
+                    0 0 80px rgba(0, 247, 238, 0.2),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    }
+}
+
+/* Logo Shadow Pulse */
+@keyframes logoPulse {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(0, 247, 238, 0.3),
+                    0 0 40px rgba(0, 247, 238, 0.1);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(0, 247, 238, 0.5),
+                    0 0 60px rgba(0, 247, 238, 0.2);
+    }
+}
+
+/* Logo Border Rotation (Used by ::before) */
+@keyframes borderRotate {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* H1 Text Gradient Shift */
+@keyframes gradientShift {
+    0%, 100% {
+        background-position: 0% center;
+    }
+    50% {
+        background-position: 100% center;
+    }
+}
+
+/* Main Navigation */
+header nav.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+/* Icon Containers */
+.mail-icon-container,
+.notification-icon-container,
+.user-container,
+.settings-container,
+.signin-container,
+.signout-container {
+    position: relative;
+}
+
+/* Navigation Links */
+header nav a {
+    color: #fff;
+    font-size: 1.5em;
+    padding: 5px;
+    border-radius: 50%;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+header nav a:hover {
+    color: #00f7ee;
+    background-color: rgba(255, 255, 255, 0.1);
+    text-decoration: none;
+}
+
+/* Search Bar Styling (assuming this is part of the utility group/nav) */
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 5px 15px;
+}
+
+#searchInput {
+    border: none;
+    background: transparent;
+    color: #fff;
+    padding: 0;
+    outline: none;
+    font-size: 1em;
+    width: 150px;
+    transition: width 0.3s ease;
+}
+
+#searchInput::placeholder {
+    color: #ccc;
+    opacity: 0.8;
+}
+
+#searchButton {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1em;
+    margin-left: 5px;
+    padding: 0;
+}
+
+/*=====================================
+  2.4 RESPONSIVE HEADER ADJUSTMENTS
+=====================================*/
+
+/* --- Tablet (Max Width: 1024px) --- */
+@media (max-width: 1024px) {
+    header {
+        padding: 15px 10px;
+        justify-content: space-between;
+    }
+
+    .header-brand img {
+        width: 50px;
+        height: 50px;
+    }
+
+    header h1 {
+        font-size: 2.2em;
+    }
+
+    /* Adjust main navigation spacing */
+    header nav.main-nav {
+        gap: 8px;
+    }
+
+    #searchInput {
+        width: 120px;
+    }
+}
+
+/* --- Mobile Landscape / Tablet Portrait (Max Width: 768px) --- */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        padding: 15px 10px;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .header-brand {
+        width: 100%;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    .header-brand img {
+        width: 45px;
+        height: 45px;
+    }
+
+    header h1 {
+        font-size: 2em;
+        text-align: center;
+    }
+
+    header nav.main-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+    }
+
+    /* Ensure search bar fits better */
+    .search-bar {
+        order: -1;
+        /* Place search bar above the icons on mobile */
+        width: 80%;
+    }
+
+    #searchInput {
+        width: 100%;
+        /* Take full width of search container */
+    }
+
+    /* The utility-group media queries are now obsolete/removed as 
+       the icon containers are styled directly */
+}
+
+/* --- Mobile Portrait (Max Width: 480px) --- */
+@media (max-width: 480px) {
+    .header-brand {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .header-brand img {
+        width: 40px;
+        height: 40px;
+    }
+
+    header h1 {
+        font-size: 1.6em;
+    }
+
+    header nav a {
+        font-size: 1.3em;
+        /* Slightly smaller icons for better fit */
+        padding: 3px;
+    }
+
+    .search-bar {
+        width: 90%;
+    }
+}
+
+/* --- Extra Small Mobile (Max Width: 360px) --- */
+@media (max-width: 360px) {
+    .header-brand img {
+        width: 35px;
+        height: 35px;
+    }
+
+    header h1 {
+        font-size: 1.4em;
+    }
+
+    .search-bar {
+        width: 95%;
+    }
+}
+
+/*=====================================
+  5. DROPDOWN MENUS & CARDS
+=====================================*/
+
+/* Icon Container Styling */
+.mail-icon-container a,
+.notification-icon-container a,
+.user-container a,
+.settings-container a,
+.signin-container a,
+.signout-container a {
+    color: #00f7ee;
+    text-decoration: none;
+    font-size: 1.5em;
+    padding: 5px;
+    border-radius: 50%;
+    transition: color 0.3s ease, background-color 0.3s ease;
+    position: relative;
+    display: inline-block;
+}
+
+/* Notification Badge */
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #ff4444;
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 0.7em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    opacity: 0;
+    transform: scale(0);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.notification-badge.show {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.notification-badge.pulse {
+    animation: pulse 2s infinite;
+}
+
+.mail-icon-container a:hover,
+.notification-icon-container a:hover,
+.user-container a:hover,
+.settings-container a:hover,
+.signin-container a:hover,
+.signout-container a:hover {
+    text-decoration: none;
+    color: lightgoldenrodyellow;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Dropdown Base Styles */
+.dropdown-input-menu,
+.profile-card,
+.settings-card {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #333;
+    border: 1px solid #444;
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    min-width: 250px;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    padding: 0;
+}
+
+/* Active State */
+.mail-icon-container.active .mail-menu,
+.notification-icon-container.active .notification-menu,
+.user-container.active .profile-card,
+.settings-container.active .settings-card,
+.profile-card.show,
+.settings-card.show,
+.mail-menu.show,
+.notification-menu.show {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+    display: block !important;
+}
+
+/*=====================================
+  5.4 DROPDOWN CONTENT & MESSAGING STYLES
+=====================================*/
+
+/* ========================================================= */
+/* Icon Containers & Positioning                            */
+/* ========================================================= */
+
+.mail-icon-container,
+.notification-icon-container {
+    position: relative;
+    /* Crucial for absolute positioning of dropdowns */
+    display: inline-block;
+}
+
+/* ========================================================= */
+/* Dropdown Menu Base Structure                             */
+/* ========================================================= */
+
+.dropdown-input-menu {
+    /* Base positioning and appearance */
+    position: absolute;
+    top: 100%;
+    /* Position right below the icon container */
+    right: 0;
+
+    width: 350px;
+    max-width: 90vw;
+    background-color: var(--dropdown-bg-light);
+    border: 1px solid var(--border-color-light);
+    /* Main border fix */
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 100;
+    /* Ensure it's above other content */
+
+    /* Hiding mechanism */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+    padding: 0;
+    /* Remove base padding, use inner divs */
+}
+
+.dropdown-input-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+
+/* Dark Mode Dropdown Overrides */
+body.dark-mode .dropdown-input-menu {
+    background-color: var(--dropdown-bg-dark);
+    border-color: var(--border-color-dark);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    color: #eee;
+}
+
+/* ========================================================= */
+/* Dropdown Header Section                                  */
+/* ========================================================= */
+
+.dropdown-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    border-bottom: 1px solid var(--header-border-light);
+    /* Separator border */
+}
+
+body.dark-mode .dropdown-header {
+    border-bottom-color: var(--header-border-dark);
+}
+
+.dropdown-header .dropdown-label {
+    /* Override global label margin */
+    font-size: 1.1em;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    border-bottom: none;
+    flex-grow: 1;
+}
+
+body.dark-mode .dropdown-header .dropdown-label {
+    color: #00f7ee;
+    /* Highlight label color */
+}
+
+.header-actions,
+.header-actions1,
+.header-actions2 {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.header-actions button,
+.header-actions1 button,
+.header-actions2 button {
+    background: none;
+    border: none;
+    color: var(--action-color);
+    cursor: pointer;
+    font-size: 0.85em;
+    padding: 5px;
+    margin-left: 5px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.header-actions button:hover,
+.header-actions1 button:hover,
+.header-actions2 button:hover {
+    background-color: rgba(76, 140, 255, 0.1);
+}
+
+/* Button Specific Styles */
+.mark-read-btn {
+    background: #28a745 !important;
+    color: white !important;
+    padding: 4px 8px;
+    font-size: 0.7em;
+    font-weight: bold;
+}
+
+.mark-read-btn:hover {
+    background: #218838 !important;
+}
+
+.clear-all-btn {
+    background: #ff6b6b !important;
+    color: white !important;
+    padding: 4px 8px;
+    font-size: 0.7em;
+    font-weight: bold;
+}
+
+.clear-all-btn:hover {
+    background: #e64a4a !important;
+}
+
+/* ========================================================= */
+/* Dropdown Content Area                                    */
+/* ========================================================= */
+
+.dropdown-content {
+    max-height: 300px;
+    /* Set a max height for scrolling */
+    overflow-y: auto;
+    padding: 0;
+}
+
+/* ========================================================= */
+/* Notification Badge Styling                               */
+/* ========================================================= */
+
+.notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: var(--badge-color);
+    color: white;
+    border-radius: 50px;
+    padding: 2px 6px;
+    font-size: 10px;
+    font-weight: bold;
+    min-width: 10px;
+    text-align: center;
+    line-height: 1.2;
+    transform: scale(0);
+    /* Start hidden */
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    text-shadow: none;
+    /* Important for dark background */
+}
+
+.notification-badge.show {
+    transform: scale(1);
+    /* Show badge */
+    opacity: 1;
+}
+
+.notification-badge.pulse {
+    animation: badgePulse 1s infinite alternate;
+}
+
+@keyframes badgePulse {
+    from {
+        box-shadow: 0 0 0 0 rgba(255, 69, 69, 0.7);
+    }
+
+    to {
+        box-shadow: 0 0 0 6px rgba(255, 69, 69, 0);
+    }
+}
+
+/* ========================================================= */
+/* Message/Notification Items                               */
+/* ========================================================= */
+
+.notification-item,
+.message-item {
+    padding: 10px 15px;
+    border-bottom: 1px solid var(--border-color-light);
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.notification-item:last-child,
+.message-item:last-child {
+    border-bottom: none;
+}
+
+.notification-item:hover,
+.message-item:hover {
+    background-color: var(--hover-bg-light, #f5f5f5);
+}
+
+/* Dark Mode Item Overrides */
+body.dark-mode .notification-item,
+body.dark-mode .message-item {
+    border-bottom-color: var(--border-color-dark);
+    padding: 12px 15px;
+    color: #ccc;
+    transition: background-color 0.2s, border-left 0.2s;
+}
+
+body.dark-mode .notification-item:hover,
+body.dark-mode .message-item:hover {
+    background-color: var(--hover-bg-dark);
+}
+
+/* Unread Item Styling */
+.notification-item.unread,
+.message-item.unread {
+    background-color: var(--unread-bg-light);
+    font-weight: 600;
+    border-left: 3px solid #00f7ee;
+    padding-left: 12px;
+}
+
+body.dark-mode .notification-item.unread,
+body.dark-mode .message-item.unread {
+    background-color: var(--unread-bg-dark);
+}
+
+/* Item Content Structure */
+.item-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9em;
+    margin-bottom: 3px;
+}
+
+.item-title {
+    font-weight: bold;
+    color: var(--text-color-light);
+}
+
+body.dark-mode .item-title {
+    color: var(--text-color-dark);
+}
+
+.item-time {
+    font-size: 0.8em;
+    color: #888;
+}
+
+.item-content {
+    font-size: 0.85em;
+    color: #666;
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+body.dark-mode .item-content {
+    color: #ccc;
+}
+
+/* Item Actions */
+.item-actions {
+    text-align: right;
+    margin-top: 5px;
+}
+
+.reply-btn,
+.move-to-messages-btn {
+    background: #00f7ee;
+    color: #333;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.7em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.reply-btn:hover,
+.move-to-messages-btn:hover {
+    background: #22ffff;
+}
+
+/*=====================================
+  5.5 DARK MODE DROPDOWN ENHANCEMENTS
+=====================================*/
+
+/* --- Dark Mode Overrides for Dropdown Backgrounds --- */
+body.dark-mode .dropdown-input-menu {
+    /* Matching the dark background of the profile card */
+    background-color: #333;
+    border: 1px solid #555;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    color: #eee;
+}
+
+body.dark-mode .dropdown-header {
+    border-bottom-color: #444;
+    /* Darker separator */
+}
+
+body.dark-mode .dropdown-header .dropdown-label {
+    color: #00f7ee;
+    /* Highlight label color */
+}
+
+/* --- Item Styling (Applies to .notification-item, .message-item) --- */
+/* Normal state for dark mode */
+body.dark-mode .notification-item,
+body.dark-mode .message-item {
+    padding: 12px 0;
+    border-bottom: 1px solid #444;
+    cursor: pointer;
+    color: #ccc;
+    transition: background-color 0.2s, border-left 0.2s;
+}
+
+/* Hover effect */
+body.dark-mode .notification-item:hover,
+body.dark-mode .message-item:hover {
+    background-color: #3a3a3a;
+}
+
+/* Unread state (Uses the teal/cyan accent color prominently seen in the app) */
+body.dark-mode .notification-item.unread,
+body.dark-mode .message-item.unread {
+    background-color: #3c4a52;
+    /* Slightly different dark shade */
+    border-left: 5px solid #00f7ee;
+    padding-left: 10px;
+    /* Shift content right due to border */
+}
+
+body.dark-mode .item-title {
+    color: #fff;
+    /* High contrast white for title */
+    font-weight: 600;
+}
+
+body.dark-mode .item-time {
+    color: #999;
+    font-size: 0.8em;
+}
+
+/* --- Button Styling for Actions (Reply/Move) --- */
+body.dark-mode .reply-btn,
+body.dark-mode .move-to-messages-btn {
+    background: #1994b2;
+    /* A deeper cyan for better contrast against dark items */
+    color: #fff;
+    font-size: 0.75em;
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: none;
+}
+
+body.dark-mode .reply-btn:hover,
+body.dark-mode .move-to-messages-btn:hover {
+    background: #0e758a;
+}
+
+/* Mark Read Button */
+body.dark-mode .mark-read-btn {
+    background: #28a745;
+    color: white;
+}
+
+body.dark-mode .mark-read-btn:hover {
+    background: #218838;
+}
+
+/* Clear All Button (Retain red for warning action) */
+body.dark-mode .clear-all-btn {
+    background: #ff6b6b;
+    color: white;
+}
+
+body.dark-mode .clear-all-btn:hover {
+    background: #e64a4a;
+}
+
+/* --- Empty State --- */
+.empty-state {
+    text-align: center;
+    padding: 30px 0;
+    color: #aaa;
+    font-style: italic;
+}
+
+.empty-state i {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: #ccc;
+}
+
+/* --- Item Actions & Buttons --- */
+.item-actions {
+    text-align: right;
+}
+
+.reply-btn,
+.move-to-messages-btn,
+.clear-all-btn {
+    background: #00f7ee;
+    color: #333;
+    border: none;
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-size: 0.75em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.clear-all-btn {
+    background: #ff6b6b;
+    color: white;
+}
+
+.clear-all-btn:hover {
+    background: #e64a4a;
+}
+
+.reply-btn:hover,
+.move-to-messages-btn:hover {
+    background: #22ffff;
+}
+
+/* ========================================================= */
+/* Message Input Area                                       */
+/* ========================================================= */
+
+.message-input-area {
+    padding: 10px;
+    border-top: 1px solid var(--header-border-light);
+    background-color: #f9f9f9;
+}
+
+body.dark-mode .message-input-area {
+    border-top-color: var(--header-border-dark);
+    background-color: #2a2a2a;
+}
+
+.message-input-area textarea {
+    width: 100%;
+    height: 60px;
+    border: 1px solid var(--border-color-light);
+    border-radius: 4px;
+    padding: 8px;
+    resize: none;
+    margin-bottom: 5px;
+    background-color: white;
+    color: black;
+    font-size: 0.9em;
+    box-sizing: border-box;
+}
+
+body.dark-mode .message-input-area textarea {
+    background-color: #333;
+    border-color: #555;
+    color: white;
+}
+
+body.dark-mode .message-input-area textarea:focus {
+    border-color: #00f7ee;
+    outline: none;
+}
+
+.message-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+.send-btn {
+    background-color: var(--action-color);
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.8em;
+}
+
+.send-btn:hover {
+    background-color: #3a7bd5;
+}
+
+.cancel-btn {
+    background-color: #ccc;
+    color: #333;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 0.8em;
+}
+
+.cancel-btn:hover {
+    background-color: #bbb;
+}
+
+/* ========================================================= */
+/* Empty State Styling                                      */
+/* ========================================================= */
+
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: #888;
+}
+
+.empty-state i {
+    font-size: 2em;
+    margin-bottom: 10px;
+    display: block;
+}
+
+body.dark-mode .empty-state {
+    color: #666;
+}
+
+/* ========================================================= */
+/* Responsive Design                                        */
+/* ========================================================= */
+
+@media (max-width: 480px) {
+    .dropdown-input-menu {
+        width: 95vw;
+        right: 2.5vw;
+    }
+
+    .dropdown-header {
+        padding: 8px 12px;
+    }
+
+    .header-actions {
+        gap: 4px;
+    }
+
+    .header-actions button {
+        font-size: 0.75em;
+        padding: 3px;
+    }
+}
+
+/* Profile Card Specific Styles */
+.profile-card {
+    min-width: 300px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 18px;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.user-profile-form {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: none;
+}
+
+.profile-header {
+    text-align: center;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-pic {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid #00f7ee;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.username {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 2px;
+}
+
+.email {
+    font-size: 0.9em;
+    color: #ccc;
+}
+
+/* Bio Section Styling */
+.bio-container,
+.location-container {
+    padding: 10px 15px;
+}
+
+.bio-display-state {
+    display: grid;
+    grid-template-areas:
+        "label button"
+        "text text";
+    grid-template-columns: 1fr auto;
+    gap: 5px;
+}
+
+.display-label {
+    grid-area: label;
+    font-size: 0.9em;
+    color: #ccc;
+}
+
+.edit-bio-btn {
+    grid-area: button;
+    background: none;
+    border: none;
+    color: lightgoldenrodyellow;
+    cursor: pointer;
+    font-size: 0.8em;
+    padding: 0;
+    justify-self: end;
+}
+
+.bio-text {
+    grid-area: text;
+    margin-top: 5px;
+    color: #fff;
+    font-style: italic;
+}
+
+.bio-edit-form {
+    display: none;
+    /* Hidden by default, toggled by JS */
+    flex-direction: column;
+}
+
+.bio-edit-form textarea {
+    width: 100%;
+    height: 80px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #555;
+    background-color: #222;
+    color: #fff;
+    resize: none;
+    border-radius: 4px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* Dropdown/Form Button Base Styles */
+.dropdown-btn,
+.form-actions button,
+.form-actions input[type="submit"] {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+}
+
+.save-btn {
+    background-color: #00f7ee;
+    color: #333;
+}
+
+.save-btn:hover {
+    background-color: #22ffff;
+}
+
+.cancel-btn {
+    background-color: #555;
+    color: #fff;
+}
+
+.cancel-btn:hover {
+    background-color: #777;
+}
+
+/* Location Specific Styles */
+#edit-location-btn {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.hidden-location-form {
+    display: none;
+    /* Hidden by default, toggled by JS */
+    padding-bottom: 10px;
+}
+
+#location-edit-form .dropdown-label {
+    padding: 0;
+    margin-bottom: 5px;
+    border-bottom: none;
+    font-size: 1em;
+    font-weight: normal;
+    color: #00f7ee;
+}
+
+#location-input {
+    width: calc(100% - 22px);
+    /* Account for padding */
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #555;
+    background-color: #222;
+    color: #fff;
+    border-radius: 4px;
+}
+
+#save-location-btn {
+    width: 100%;
+}
+
+#current-location-display {
+    color: #ccc;
+    font-size: 0.9em;
+    margin-top: 10px;
+}
+
+/* Separator line */
+hr {
+    border: 0;
+    height: 1px;
+    background: #444;
+    margin: 10px 0;
+}
+
+/* Final Action Buttons at the Bottom of the Profile Card */
+.user-profile-form>.form-actions {
+    justify-content: space-between;
+    padding: 15px;
+    border-top: 1px solid #444;
+    margin-top: 10px;
+}
+
+.user-profile-form .form-actions input[type="submit"] {
+    flex-grow: 1;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    padding: 10px 15px;
+}
+
+/* Update Profile Button */
+.user-profile-form .form-actions input[value="Update Profile"] {
+    background-color: #00f7ee;
+    color: #333;
+}
+
+.user-profile-form .form-actions input[value="Update Profile"]:hover {
+    background-color: #22ffff;
+}
+
+/* Invite Friends Button */
+.user-profile-form .form-actions input[value="invite friends"] {
+    background-color: #555;
+    color: #fff;
+}
+
+.user-profile-form .form-actions input[value="invite friends"]:hover {
+    background-color: #777;
+}
+
+
+/* Settings Card */
+.settings-card {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 18px;
+    padding: 10px;
+    min-width: 200px;
+    text-align: center;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+
+/* General Dropdown Menu */
+.dropdown-input-menu {
+    display: flex;
+    flex-direction: column;
+    min-width: 200px;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 99;
+    display: none;
+}
+
+/* Removed old hover rules - now using .show class */
+
+.settings-menu .dropdown-content a {
+    color: #00f7ee;
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+    padding: 5px 0;
+    margin: 5px 0;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s;
+}
+
+.settings-menu .dropdown-content a:hover {
+    background-color: #f0f0f0;
+}
+
+/* Form Actions */
+.form-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.user-profile-form input[type="submit"] {
+    padding: 8px 12px;
+    font-size: 1em;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #147b98;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+.user-profile-form input[type="submit"]:hover {
+    background-color: #0e5b70;
+}
+
+input[placeholder="Location"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/*=====================================
+  6. BIO & LOCATION EDITING
+=====================================*/
+
+/* Bio Container */
+.bio-container {
+    width: 100%;
+    margin: 0;
+    padding: 10px 15px;
+    border: none;
+    background-color: #fff;
+    color: #333;
+}
+
+.bio-display-state {
+    display: grid;
+    grid-template-areas:
+        "label button"
+        "text text";
+    grid-template-columns: 1fr auto;
+    gap: 5px;
+    text-align: left;
+}
+
+.display-label {
+    grid-area: label;
+    font-size: 0.9em;
+    color: #ccc;
+}
+
+.bio-text {
+    grid-area: text;
+    margin-top: 5px;
+    color: #fff;
+    font-style: italic;
+}
+
+.edit-bio-btn {
+    grid-area: button;
+    background: none;
+    border: none;
+    color: lightgoldenrodyellow;
+    cursor: pointer;
+    font-size: 0.8em;
+    padding: 5px 10px;
+    border-radius: 15px;
+    background-color: #000000;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    justify-self: end;
+}
+
+.edit-bio-btn:hover {
+    background-color: lightgoldenrodyellow;
+    transform: scale(1.05);
+    color: #333;
+}
+
+.bio-edit-form {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.bio-container.edit-active .bio-edit-form {
+    display: flex;
+}
+
+.bio-container.edit-active .bio-display-state {
+    display: none;
+}
+
+.bio-edit-form textarea {
+    width: 100%;
+    height: 80px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #555;
+    background-color: #222;
+    color: #fff;
+    resize: none;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Button Styles */
+.dropdown-btn,
+.form-actions button,
+.form-actions input[type="submit"],
+.save-btn,
+.cancel-btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+}
+
+.save-btn {
+    background-color: #00f7ee;
+    color: #333;
+    width: 50%;
+}
+
+.save-btn:hover {
+    background-color: #22ffff;
+}
+
+.cancel-btn {
+    background-color: #555;
+    color: #fff;
+    width: 50%;
+}
+
+.cancel-btn:hover {
+    background-color: #777;
+}
+
+/* Location Container */
+.location-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 15px;
+    text-align: left;
+}
+
+.location-container .dropdown-label {
+    margin-bottom: 5px;
+    padding: 0;
+    border-bottom: none;
+    font-size: 1em;
+    font-weight: normal;
+    color: #00f7ee;
+}
+
+#location-input {
+    width: calc(100% - 22px);
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #555;
+    background-color: #222;
+    color: #fff;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#current-location-display {
+    color: #ccc;
+    font-size: 0.9em;
+    margin-top: 10px;
+}
+
+#edit-location-btn,
+#save-location-btn {
+    background-color: #147b98;
+    color: white;
+    padding: 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#edit-location-btn:hover,
+#save-location-btn:hover {
+    background-color: #0e5b70;
+}
+
+.hidden-location-form {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    padding-bottom: 10px;
+}
+
+.location-container.active .hidden-location-form {
+    display: flex;
+}
+
+.location-container.active #edit-location-btn {
+    display: none;
+}
+
+/* Separator */
+hr {
+    border: 0;
+    height: 1px;
+    background: #444;
+    margin: 10px 0;
+}
+
+/* Final Profile Actions */
+.user-profile-form>.form-actions {
+    justify-content: space-between;
+    padding: 15px;
+    border-top: 1px solid #444;
+    margin-top: 10px;
+}
+
+.user-profile-form .form-actions input[type="submit"] {
+    flex-grow: 1;
+    text-transform: uppercase;
+    font-size: 0.9em;
+    padding: 10px 15px;
+}
+
+.user-profile-form .form-actions input[value="Update Profile"] {
+    background-color: #00f7ee;
+    color: #333;
+}
+
+.user-profile-form .form-actions input[value="Update Profile"]:hover {
+    background-color: #22ffff;
+}
+
+.user-profile-form .form-actions input[value="invite friends"] {
+    background-color: #555;
+    color: #fff;
+}
+
+.user-profile-form .form-actions input[value="invite friends"]:hover {
+    background-color: #777;
+}
+
+/*=====================================
+  8. CONTENT SECTION STYLES
+=====================================*/
+.content-section {
+    display: block;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.95) transparent;
+    margin-top: 30px;
+    padding: 20px 0;
+    text-align: center;
+}
+
+.content-section header {
+    background-color: #666;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.content-section h1 {
+    font-size: 2.2em;
+    color: #ffeb3b;
+    margin-bottom: 25px;
+    border-bottom: 3px solid #ffeb3b;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+/*=====================================
+  8.5 SEARCH RESULTS STYLES
+=====================================*/
+#searchResults {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 15px 20px;
+    /* Increased padding */
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    /* Enhanced shadow */
+    width: 90%;
+    animation: fadeIn 0.3s ease-in;
+    /* Added animation */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.search-message {
+    padding: 10px 0;
+    font-size: 1.2em;
+    color: #333;
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+}
+
+.search-message strong {
+    color: #147b98;
+    /* Highlight the number */
+}
+
+/* Empty state message */
+#searchResults:empty {
+    display: none;
+    /* Hide when empty */
+}
+
+/*=====================================
+  8.6 SECTION SEPARATORS
+=====================================*/
+.coffee-menu-section {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 40px;
+}
+
+.coffee-menu-section,
+.study-hub-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+}
+
+/*=====================================
+  8. MENU & HUB CARD STYLES
+=====================================*/
+
+/*=====================================
+  8.7 SECTION LAYOUT (Moved to the start for structural context)
+=====================================*/
+.coffee-menu-section,
+.study-hub-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 30px 20px;
+}
+
+/* Section Headers */
+.content-section>header {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 30px;
+    grid-column: 1 / -1;
+}
+
+.content-section>header h1 {
+    font-size: 2.5em;
+    color: #147b98;
+    margin-bottom: 10px;
+    border-bottom: 4px solid #ffeb3b;
+    display: inline-block;
+    padding-bottom: 8px;
+}
+
+/*=====================================
+  8.1 CARD CONTAINER STYLES
+=====================================*/
+.coffee-menu-section form,
+.study-hub-section form,
+.menu-card,
+.hub-card {
+    background-color: #47424288;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 20px;
+    width: 320px;
+    min-height: 200px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    animation: cardFadeIn 0.5s ease-out; /* Moved base animation here */
+}
+
+/*=====================================
+  8.3 LIST CONTAINER STYLES
+=====================================*/
+.coffee-menu-section ul,
+.study-hub-section ul,
+.menu-list,
+.hub-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1;
+}
+
+/*=====================================
+  8.4 LIST ITEM STYLES
+=====================================*/
+.coffee-menu-section li,
+.study-hub-section li,
+.menu-item,
+.hub-item {
+    display: grid;
+    grid-template-columns: 60px 1fr auto;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 8px;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.coffee-menu-section li:last-child,
+.study-hub-section li:last-child,
+.menu-item:last-child,
+.hub-item:last-child {
+    border-bottom: none;
+}
+
+---
+
+/*=====================================
+  8.2 CARD HEADER STYLES
+=====================================*/
+.coffee-menu-section h2,
+.study-hub-section h2,
+.menu-card h2,
+.hub-card h2 {
+    font-size: 1.5em;
+    color: hsl(193, 100%, 50%);
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #ffeb3b;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Icon Styling in Hub Cards */
+.hub-card h2 i {
+    color: #ffeb3b;
+    font-size: 1.2em;
+}
+
+/*=====================================
+  8.5 ITEM IMAGE STYLES
+=====================================*/
+.menu-item-img {
+    width: 60px;
+    height: 50px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 2px solid #e0e0e0;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    flex-shrink: 0;
+}
+
+/*=====================================
+  8.6 ITEM TEXT STYLES
+=====================================*/
+.item-name {
+    font-size: 1em;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 1.4;
+}
+
+.item-price,
+.item-detail {
+    font-size: 0.95em;
+    font-weight: bold;
+    color: #1fcfff;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.item-detail {
+    color: #87CEEB;
+    font-size: 0.85em;
+    font-style: italic;
+}
+
+/*=====================================
+  8.8 CATEGORY BADGES
+=====================================*/
+.category-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.75em;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-left: 8px;
+}
+
+.badge-hot {
+    background-color: #ff6b6b;
+    color: white;
+}
+
+.badge-cold {
+    background-color: #4ecdc4;
+    color: white;
+}
+
+.badge-new {
+    background-color: #ffeb3b;
+    color: #333;
+}
+
+.badge-popular {
+    background-color: #147b98;
+    color: white;
+}
+
+---
+
+/*=====================================
+  8.1 HOVER EFFECTS
+=====================================*/
+.coffee-menu-section form:hover,
+.study-hub-section form:hover,
+.menu-card:hover,
+.hub-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* 8.4 LIST ITEM HOVER EFFECTS */
+.coffee-menu-section li:hover,
+.study-hub-section li:hover,
+.menu-item:hover,
+.hub-item:hover {
+    background-color: #000000;
+    transform: translateX(5px);
+    border-radius: 6px;
+}
+
+/* 8.5 ITEM IMAGE HOVER EFFECTS */
+.coffee-menu-section li:hover .menu-item-img,
+.study-hub-section li:hover .menu-item-img,
+.menu-item:hover .menu-item-img,
+.hub-item:hover .menu-item-img {
+    transform: scale(1.1);
+    border-color: #ffeb3b;
+}
+
+/*=====================================
+  8.1 HIDDEN CARD STYLES (for search filtering)
+=====================================*/
+.coffee-menu-section form[style*="display: none"],
+.study-hub-section form[style*="display: none"],
+.menu-card[style*="display: none"],
+.hub-card[style*="display: none"] {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* 8.4 HIDDEN LIST ITEM STYLES (for search filtering) */
+.coffee-menu-section li[style*="display: none"],
+.study-hub-section li[style*="display: none"],
+.menu-item[style*="display: none"],
+.hub-item[style*="display: none"] {
+    opacity: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+/*=====================================
+  8.7 CART SYSTEM STYLES
+=====================================*/
+
+/* ============================================================
+ * 8.7.1 CART CONTAINER & ICON
+ * ============================================================ */
+
+/* Cart Container - Positioning context for dropdown and badge */
+.cart-container {
+    position: relative;
+    display: inline-block;
+}
+
+/* Cart Icon/Link Wrapper */
+.cart-container a,
+#cart-icon {
+    position: relative;
+    display: inline-block;
+    padding: 10px;
+    cursor: pointer;
+}
+
+/* ============================================================
+ * 8.7.2 CART BADGE
+ * ============================================================ */
+
+.cart-badge,
+#cart-badge {
+    /* Positioning */
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    z-index: 10;
+    
+    /* Dimensions */
+    min-width: 18px;
+    height: 18px;
+    line-height: 18px;
+    
+    /* Appearance */
+    border-radius: 50%;
+    background-color: var(--primary-color, #f44336);
+    color: white;
+    
+    /* Typography */
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+    
+    /* Visibility (controlled by JavaScript) */
+    display: none;
+}
+
+#cart-badge.show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ============================================================
+ * 8.7.3 CART ACTION BUTTONS
+ * ============================================================ */
+
+/* Base Button Styles */
+.cart-btn,
+.add-to-cart-btn,
+.hub-item .item-actions button {
+    /* Layout */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    padding: 8px 12px;
+    
+    /* Appearance */
+    border: 1px solid #4CAF50;
+    border-radius: 50%;
+    background-color: #4CAF50;
+    color: white;
+    
+    /* Interaction */
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+}
+
+/* Icon Sizing */
+.cart-btn i,
+.add-to-cart-btn i {
+    font-size: 1.1em;
+}
+
+/* Menu Item Cart Button (Food/Drink) */
+.menu-item .item-actions .cart-btn {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+}
+
+.menu-item .item-actions .cart-btn:hover {
+    background-color: #45a049;
+    border-color: #45a049;
+    transform: scale(1.05);
+}
+
+/* Amenity Cart Button (Printing/Stationery) */
+.hub-item .item-actions .add-to-cart-btn {
+    background-color: #3f51b5;
+    border-color: #3f51b5;
+}
+
+.hub-item .item-actions .add-to-cart-btn:hover {
+    background-color: #303f9f;
+    border-color: #303f9f;
+    transform: scale(1.05);
+}
+
+/* Locker Rent Button */
+.cart-btn[title="Rent Locker"] {
+    background-color: #ff9800;
+    border-color: #ff9800;
+}
+
+.cart-btn[title="Rent Locker"]:hover {
+    background-color: #e68a00;
+    border-color: #e68a00;
+    transform: scale(1.05);
+}
+
+/* Active/Click State */
+.cart-btn:active,
+.add-to-cart-btn:active {
+    transform: scale(0.95);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3) inset;
+}
+
+/*=====================================
+  8.8 CART DROPDOWN MENU
+=====================================*/
+
+/* ============================================================
+ * 8.8.1 DROPDOWN BASE STYLES
+ * ============================================================ */
+
+.dropdown-input-menu,
+.cart-menu {
+    /* Visibility */
+    display: none;
+    
+    /* Positioning */
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 1000;
+    
+    /* Appearance */
+    background-color: var(--card-bg-color);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    min-width: 320px;
+    max-width: 400px;
+}
+
+/* Show State */
+.dropdown-input-menu.show,
+.cart-menu.show {
+    display: block;
+}
+
+/*=====================================
+  8.9 CART MODAL STYLES
+=====================================*/
+
+/* ============================================================
+ * 8.9.1 MODAL OVERLAY
+ * ============================================================ */
+
+.cart-modal-overlay {
+    /* Full Screen Coverage */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    
+    /* Background */
+    background-color: rgba(0, 0, 0, 0.7);
+    
+    /* Layout */
+    display: flex;
+    justify-content: flex-end;
+    
+    /* Animation */
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+/* Hidden State */
+.cart-modal-overlay.hidden {
+    display: none;
+    opacity: 0;
+}
+
+/* ============================================================
+ * 8.9.2 MODAL CONTAINER
+ * ============================================================ */
+
+.cart-modal {
+    /* Dimensions */
+    position: relative;
+    width: 380px;
+    height: 100vh;
+    max-height: 100%;
+    
+    /* Layout */
+    display: flex;
+    flex-direction: column;
+    padding: 30px 0;
+    
+    /* Appearance */
+    background-color: #1e1e1e;
+    color: #ffffff;
+    box-shadow: -4px 0 15px rgba(0, 0, 0, 0.4);
+    
+    /* Scroll */
+    overflow-y: auto;
+    
+    /* Animation */
+    transform: translateX(0);
+    transition: transform 0.4s ease-out;
+}
+
+/* Off-screen Animation */
+.cart-modal-overlay.hidden .cart-modal {
+    transform: translateX(100%);
+}
+
+/* ============================================================
+ * 8.9.3 MODAL HEADER
+ * ============================================================ */
+
+.cart-modal-header {
+    /* Layout */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 25px 20px;
+    margin-bottom: 20px;
+    
+    /* Border */
+    border-bottom: 2px solid #147b98;
+}
+
+.cart-modal-header h2 {
+    font-size: 1.8em;
+    color: hsl(193, 100%, 50%);
+    margin: 0;
+}
+
+.cart-modal-close-btn {
+    /* Reset */
+    background: none;
+    border: none;
+    
+    /* Appearance */
+    color: #fff;
+    font-size: 1.5em;
+    opacity: 0.8;
+    
+    /* Interaction */
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.cart-modal-close-btn:hover {
+    opacity: 1;
+}
+
+/* ============================================================
+ * 8.9.4 MODAL ITEM LIST
+ * ============================================================ */
+
+.cart-modal-list {
+    /* Reset */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    
+    /* Layout */
+    flex-grow: 1;
+}
+
+.cart-modal-list li {
+    /* Grid Layout */
+    display: grid;
+    grid-template-columns: 1fr auto 40px;
+    align-items: center;
+    gap: 10px;
+    
+    /* Spacing */
+    padding: 15px 25px;
+    
+    /* Border */
+    border-bottom: 1px solid #333;
+    
+    /* Interaction */
+    transition: background-color 0.2s ease;
+}
+
+.cart-modal-list li:hover {
+    background-color: #2a2a2a;
+}
+
+/* Item Info */
+.cart-item-info {
+    line-height: 1.4;
+}
+
+.cart-item-name {
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.cart-item-qty {
+    font-size: 0.85em;
+    color: #87CEEB;
+}
+
+/* Item Price */
+.cart-item-price {
+    font-weight: bold;
+    color: #ffeb3b;
+    white-space: nowrap;
+}
+
+/* Remove Button */
+.remove-item-btn {
+    /* Reset */
+    background: none;
+    border: none;
+    
+    /* Appearance */
+    color: #ff6b6b;
+    font-size: 1.1em;
+    
+    /* Interaction */
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.remove-item-btn:hover {
+    color: #ff3838;
+}
+
+/* ============================================================
+ * 8.9.5 MODAL FOOTER
+ * ============================================================ */
+
+.cart-modal-footer {
+    padding: 20px 25px 0;
+    border-top: 1px solid #333;
+}
+
+/* Cart Total Display */
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.4em;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.cart-total-label {
+    color: #fff;
+}
+
+.cart-total-amount {
+    color: #ffeb3b;
+}
+
+/* Checkout Button */
+.cart-checkout-btn {
+    /* Full Width */
+    width: 100%;
+    padding: 15px 20px;
+    
+    /* Appearance */
+    background-color: #147b98;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    
+    /* Typography */
+    font-size: 1.1em;
+    font-weight: 700;
+    text-transform: uppercase;
+    
+    /* Interaction */
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cart-checkout-btn:hover {
+    background-color: #0e5b70;
+}
+
+/*=====================================
+  8.10 EMPTY STATE STYLES
+=====================================*/
+
+.empty-menu {
+    /* Layout */
+    grid-column: 1 / -1;
+    padding: 40px 20px;
+    
+    /* Typography */
+    text-align: center;
+    color: #999;
+    font-style: italic;
+}
+
+.empty-menu i {
+    display: block;
+    font-size: 3em;
+    margin-bottom: 15px;
+    color: #ddd;
+}
+
+/*=====================================
+  8.11 TABLE LAYOUT (ALTERNATIVE)
+=====================================*/
+
+.menu-table {
+    width: 100%;
+    margin-top: 15px;
+    border-collapse: collapse;
+}
+
+/* Table Header */
+.menu-table thead {
+    background-color: #147b98;
+    color: white;
+}
+
+.menu-table th {
+    padding: 12px;
+    text-align: left;
+    font-weight: bold;
+}
+
+/* Table Cells */
+.menu-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* Table Row Hover */
+.menu-table tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* Price Column */
+.menu-table .price-col {
+    text-align: right;
+    font-weight: bold;
+    color: #147b98;
+}
+
+/*=====================================
+  8.12 ANIMATIONS
+=====================================*/
+
+/* ============================================================
+ * 8.12.1 CARD FADE IN
+ * ============================================================ */
+
+@keyframes cardFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Staggered Animation Delays */
+.menu-card:nth-child(2),
+.hub-card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.menu-card:nth-child(3),
+.hub-card:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.menu-card:nth-child(4),
+.hub-card:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+.menu-card:nth-child(5),
+.hub-card:nth-child(5) {
+    animation-delay: 0.4s;
+}
+
+.menu-card:nth-child(6),
+.hub-card:nth-child(6) {
+    animation-delay: 0.5s;
+}
+
+/* ============================================================
+ * 8.12.2 SKELETON LOADING
+ * ============================================================ */
+
+.skeleton-card {
+    background: linear-gradient(
+        90deg,
+        #f0f0f0 25%,
+        #e0e0e0 50%,
+        #f0f0f0 75%
+    );
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/*=====================================
+  8.13 RESPONSIVE ADJUSTMENTS
+=====================================*/
+
+@media (max-width: 768px) {
+    /* Cart Modal - Full Width on Mobile */
+    .cart-modal {
+        width: 100%;
+    }
+    
+    /* Dropdown Menu - Adjust Width */
+    .dropdown-input-menu,
+    .cart-menu {
+        min-width: 280px;
+        right: -10px;
+    }
+    
+    /* Cart Buttons - Slightly Smaller */
+    .cart-btn,
+    .add-to-cart-btn {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Modal Header - Smaller Font */
+    .cart-modal-header h2 {
+        font-size: 1.5em;
+    }
+    
+    /* Cart Total - Smaller Font */
+    .cart-total {
+        font-size: 1.2em;
+    }
+    
+    /* List Items - Reduced Padding */
+    .cart-modal-list li {
+        padding: 12px 15px;
+    }
+}
+
+/*=====================================
+  8.14 DARK MODE SUPPORT
+=====================================*/
+
+.dark-mode .cart-modal {
+    background-color: #1a1a1a;
+    color: #f0f0f0;
+}
+
+.dark-mode .cart-modal-list li {
+    border-bottom-color: #2a2a2a;
+}
+
+.dark-mode .cart-modal-list li:hover {
+    background-color: #252525;
+}
+
+.dark-mode .cart-modal-footer {
+    border-top-color: #2a2a2a;
+}
+
+.dark-mode .dropdown-input-menu,
+.dark-mode .cart-menu {
+    background-color: var(--dark-card-bg, #2c3e50);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.dark-mode .menu-table tr:hover {
+    background-color: #2a2a2a;
+}
+
+/*===========================
+  9. RESPONSIVE DESIGN
+=====================================*/
+
+/* Tablet (Max Width: 1024px) */
+@media (max-width: 1024px) {
+
+    .coffee-menu-section,
+    .study-hub-section {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+        padding: 25px 15px;
+    }
+
+    .coffee-menu-section form,
+    .study-hub-section form,
+    .menu-card,
+    .hub-card {
+        width: 100%;
+    }
+
+    .content-section>header h1 {
+        font-size: 2.2em;
+    }
+}
+
+/* Mobile Landscape (Max Width: 768px) */
+@media (max-width: 768px) {
+
+    .coffee-menu-section,
+    .study-hub-section {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 20px 15px;
+    }
+
+    .coffee-menu-section form,
+    .study-hub-section form,
+    .menu-card,
+    .hub-card {
+        width: 100%;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .content-section>header h1 {
+        font-size: 2em;
+    }
+
+    .coffee-menu-section h2,
+    .study-hub-section h2,
+    .menu-card h2,
+    .hub-card h2 {
+        font-size: 1.4em;
+    }
+
+    .coffee-menu-section li,
+    .study-hub-section li,
+    .menu-item,
+    .hub-item {
+        grid-template-columns: 50px 1fr auto;
+        gap: 10px;
+        padding: 10px 5px;
+    }
+
+    .menu-item-img {
+        width: 50px;
+        height: 40px;
+    }
+
+    .item-name {
+        font-size: 0.95em;
+    }
+
+    .item-price,
+    .item-detail {
+        font-size: 0.9em;
+    }
+}
+
+/* Mobile Portrait (Max Width: 480px) */
+@media (max-width: 480px) {
+
+    .coffee-menu-section,
+    .study-hub-section {
+        padding: 15px 10px;
+        gap: 15px;
+    }
+
+    .coffee-menu-section form,
+    .study-hub-section form,
+    .menu-card,
+    .hub-card {
+        padding: 15px;
+        border-radius: 10px;
+        width: 100%;
+    }
+
+    .content-section>header h1 {
+        font-size: 1.6em;
+        padding-bottom: 6px;
+        border-bottom-width: 3px;
+    }
+
+    .coffee-menu-section h2,
+    .study-hub-section h2,
+    .menu-card h2,
+    .hub-card h2 {
+        font-size: 1.3em;
+        margin-bottom: 12px;
+        padding-bottom: 8px;
+        gap: 8px;
+    }
+
+    .hub-card h2 i {
+        font-size: 1em;
+    }
+
+    .coffee-menu-section li,
+    .study-hub-section li,
+    .menu-item,
+    .hub-item {
+        grid-template-columns: 45px 1fr;
+        grid-template-rows: auto auto;
+        gap: 8px;
+    }
+
+    .menu-item-img {
+        width: 45px;
+        height: 35px;
+        grid-row: 1 / 3;
+    }
+
+    .item-name {
+        font-size: 0.9em;
+        grid-column: 2;
+        grid-row: 1;
+    }
+
+    .item-price,
+    .item-detail {
+        font-size: 0.85em;
+        grid-column: 2;
+        grid-row: 2;
+        text-align: left;
+    }
+}
+
+/* Extra Small Mobile (Max Width: 360px) */
+@media (max-width: 360px) {
+
+    .coffee-menu-section form,
+    .study-hub-section form,
+    .menu-card,
+    .hub-card {
+        padding: 12px;
+    }
+
+    .content-section>header h1 {
+        font-size: 1.4em;
+    }
+
+    .coffee-menu-section h2,
+    .study-hub-section h2,
+    .menu-card h2,
+    .hub-card h2 {
+        font-size: 1.2em;
+    }
+
+    .coffee-menu-section li,
+    .study-hub-section li,
+    .menu-item,
+    .hub-item {
+        padding: 8px 4px;
+    }
+
+    .menu-item-img {
+        width: 40px;
+        height: 32px;
+    }
+
+    .item-name {
+        font-size: 0.85em;
+    }
+
+    .item-price,
+    .item-detail {
+        font-size: 0.8em;
+    }
+}
+
+/*=====================================
+  10. PRINT STYLES
+=====================================*/
+@media print {
+
+    .coffee-menu-section form,
+    .study-hub-section form,
+    .menu-card,
+    .hub-card {
+        page-break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #000;
+        width: 100%;
+    }
+
+    .coffee-menu-section li:hover,
+    .study-hub-section li:hover,
+    .menu-item:hover,
+    .hub-item:hover {
+        background-color: transparent;
+        transform: none;
+    }
+
+    .item-price,
+    .item-detail {
+        color: #000;
+    }
+
+    .menu-item-img {
+        border-color: #000;
+    }
+}
+
+
+/*=====================================
+  8.8 CARD HEADER & CONTENT STYLES
+=====================================*/
+.coffee-menu-section h2,
+.study-hub-section h2 {
+    font-size: 1.5em;
+    color: #00c8ff;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ffeb3b;
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+.coffee-menu-section ul,
+.study-hub-section ul {
+    list-style: none;
+    text-align: left;
+    padding-left: 0;
+    flex-grow: 1;
+}
+
+.coffee-menu-section li,
+.study-hub-section li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 5px 0;
+    border-bottom: 1px dotted #eee;
+    color: #333;
+    font-size: 1em;
+    transition: opacity 0.3s ease;
+    /* Smooth hide/show */
+}
+
+.coffee-menu-section li:last-child,
+.study-hub-section li:last-child {
+    border-bottom: none;
+}
+
+/* Hidden list items (for search filtering) */
+.coffee-menu-section li[style*="display: none"],
+.study-hub-section li[style*="display: none"] {
+    opacity: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+/*=====================================
+  8.9 MENU ITEM IMAGE STYLES
+=====================================*/
+main form li img.menu-item-img {
+    width: 60px;
+    height: 40px;
+    border-radius: 4px;
+    object-fit: cover;
+    border: 1px solid #ccc;
+    flex-shrink: 0;
+}
+
+.coffee-menu-section li>*,
+.study-hub-section li>* {
+    line-height: normal;
+    align-self: center;
+}
+
+/*=====================================
+  8.10 MAIN LAYOUT
+=====================================*/
+main {
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+/*=====================================
+  9. FOOTER STYLES
+=====================================*/
+footer {
+    background-color: #147b98;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    border-bottom: 3px solid #00f7ee;
+    width: 100%;
+    margin-top: 100px;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.copyright {
+    margin-bottom: 15px;
+    font-size: 0.9em;
+}
+
+.social-links {
+    display: flex;
+    gap: 20px;
+    font-size: 1.5em;
+}
+
+.social-links a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-links a:hover {
+    transform: scale(1.2);
+}
+
+.fa-facebook:hover {
+    color: #3b5998;
+}
+
+.fa-instagram:hover {
+    color: #c13584;
+}
+
+.fa-whatsapp:hover {
+    color: #25d366;
+}
+
+.fa-twitter:hover {
+    color: #1da1f2;
+}
+
+/*=====================================
+  10. MEDIA QUERIES (RESPONSIVE DESIGN)
+=====================================*/
+
+/* --- 10.1 Large Tablet / Small Desktop (Max Width: 1024px) --- */
+@media (max-width: 1024px) {
+    header {
+        padding: 15px 10px;
+    }
+
+    header h1 {
+        font-size: 2.2em;
+    }
+
+    .search-bar {
+        margin-left: 30px;
+    }
+
+    .search-bar input[type="text"] {
+        min-width: 180px;
+        /* Reduce width on smaller screens */
+    }
+
+    .mail,
+    .notification-bell,
+    .user-container,
+    .settings-container,
+    .signin-container,
+    .signout-container,
+    .cart-container {
+        margin-left: 15px;
+    }
+
+    .coffee-menu-section,
+    .study-hub-section {
+        max-width: 960px;
+        gap: 15px;
+    }
+
+    .coffee-menu-section form,
+    .study-hub-section form {
+        width: 220px;
+        min-height: 160px;
+    }
+
+    #searchResults {
+        width: 95%;
+        /* Wider on tablets */
+    }
+}
+
+/* --- 10.2 Tablet Portrait / Mobile Landscape (Max Width: 768px) --- */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        padding: 15px 10px;
+        align-items: flex-start;
+    }
+
+    header h1 {
+        margin-bottom: 15px;
+        align-self: flex-start;
+        margin-left: 10px;
+        font-size: 2em;
+        /* Reduce size */
+    }
+
+    header nav {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 10px;
+        width: 100%;
+        padding: 0 10px;
+    }
+
+    /* Move search bar to its own row */
+    .search-bar {
+        margin-left: 0;
+        order: -1;
+        width: 100%;
+        max-width: 95%;
+        margin-bottom: 10px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .search-bar input[type="text"] {
+        min-width: 150px;
+        flex: 1;
+        /* Take available space */
+    }
+
+    .mail,
+    .notification-bell,
+    .user-container,
+    .settings-container,
+    .signin-container,
+    .signout-container,
+    .cart-container {
+        margin-left: 10px;
+        font-size: 1.5em;
+        order: 2;
+    }
+
+    /* Dropdowns */
+    .profile-card,
+    .settings-card,
+    .dropdown-input-menu {
+        min-width: 250px;
+        top: 50px;
+        right: 10px;
+    }
+
+    .coffee-menu-section,
+    .study-hub-section {
+        flex-direction: column;
+        align-items: center;
+        max-width: 100%;
+        padding: 0 15px;
+    }
+
+    .coffee-menu-section form,
+    .study-hub-section form {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .content-section h1 {
+        font-size: 1.8em;
+    }
+
+    #searchResults {
+        width: 95%;
+        padding: 12px 15px;
+    }
+
+    .search-message {
+        font-size: 1.1em;
+    }
+
+    footer {
+        margin-top: 50px;
+    }
+
+    /* --- 10.3 Mobile Portrait (Max Width: 480px) --- */
+    @media (max-width: 480px) {
+        header h1 {
+            font-size: 1.6em;
+            margin-left: 5px;
+        }
+
+        header nav {
+            padding: 0 5px;
+        }
+
+        header nav a {
+            margin: 0 8px;
+            font-size: 0.9em;
+        }
+
+        .search-bar {
+            max-width: 100%;
+            padding: 0 10px;
+        }
+
+        .search-bar input[type="text"] {
+            min-width: 120px;
+            font-size: 0.9em;
+            padding: 6px 10px;
+        }
+
+        .search-bar button {
+            padding: 6px 10px;
+            min-width: 35px;
+        }
+
+        .search-bar button i {
+            font-size: 1em;
+        }
+
+        .mail,
+        .notification-bell,
+        .user-container,
+        .settings-container,
+        .signin-container,
+        .signout-container,
+        .cart-container {
+            margin-left: 8px;
+            font-size: 1.3em;
+        }
+
+        .utility-group {
+            margin-left: 10px;
+            gap: 5px;
+        }
+
+        .utility-group a {
+            font-size: 0.8em;
+            margin: 0 5px;
+        }
+
+        /* Dropdowns */
+        .profile-card,
+        .settings-card {
+            min-width: 220px;
+            padding: 15px;
+            right: 5px;
+            top: 45px;
+        }
+
+        .profile-pic {
+            width: 50px;
+            height: 50px;
+        }
+
+        .dropdown-input-menu {
+            min-width: 180px;
+            right: 5px;
+        }
+
+        /* Bio Container */
+        .bio-container {
+            font-size: 0.9em;
+        }
+
+        .edit-bio-btn {
+            font-size: 0.8em;
+            padding: 4px 8px;
+        }
+
+        .bio-edit-form textarea {
+            font-size: 0.9em;
+            padding: 8px;
+        }
+
+        .save-btn,
+        .cancel-btn {
+            font-size: 14px;
+            padding: 8px;
+        }
+
+        /* Location Container */
+        #location-input {
+            font-size: 0.9em;
+            padding: 6px;
+        }
+
+        #edit-location-btn,
+        #save-location-btn {
+            font-size: 0.9em;
+            padding: 6px;
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 15px 0;
+            margin-top: 20px;
+        }
+
+        .content-section h1 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .coffee-menu-section,
+        .study-hub-section {
+            padding: 0 10px;
+            gap: 15px;
+        }
+
+        .coffee-menu-section form,
+        .study-hub-section form {
+            width: 100%;
+            max-width: 100%;
+            padding: 12px;
+            min-height: 150px;
+        }
+
+        .coffee-menu-section h2,
+        .study-hub-section h2 {
+            font-size: 1.3em;
+        }
+
+        .coffee-menu-section li,
+        .study-hub-section li {
+            font-size: 0.9em;
+            gap: 8px;
+        }
+
+        main form li img.menu-item-img {
+            width: 50px;
+            height: 35px;
+        }
+
+        /* Search Results */
+        #searchResults {
+            width: 95%;
+            padding: 10px 12px;
+            margin: 15px auto;
+        }
+
+        .search-message {
+            font-size: 1em;
+            padding: 8px 0;
+        }
+
+        /* Footer */
+        footer {
+            padding: 15px 0;
+            margin-top: 40px;
+        }
+
+        .copyright {
+            font-size: 0.8em;
+        }
+
+        .social-links {
+            gap: 15px;
+            font-size: 1.3em;
+        }
+    }
+
+    /* --- 10.4 Extra Small Mobile (Max Width: 360px) --- */
+    @media (max-width: 360px) {
+        header h1 {
+            font-size: 1.4em;
+        }
+
+        header nav a {
+            font-size: 0.85em;
+            margin: 0 5px;
+        }
+
+        .search-bar input[type="text"] {
+            min-width: 100px;
+            font-size: 0.85em;
+        }
+
+        .search-bar button {
+            padding: 5px 8px;
+            min-width: 32px;
+        }
+
+        .mail,
+        .notification-bell,
+        .user-container,
+        .settings-container,
+        .signin-container,
+        .signout-container,
+        .cart-container {
+            font-size: 1.2em;
+            margin-left: 5px;
+        }
+
+        .profile-card,
+        .settings-card {
+            min-width: 200px;
+            padding: 12px;
+        }
+
+        .content-section h1 {
+            font-size: 1.3em;
+        }
+
+        .coffee-menu-section h2,
+        .study-hub-section h2 {
+            font-size: 1.2em;
+        }
+
+        #searchResults {
+            padding: 8px 10px;
+        }
+
+        .search-message {
+            font-size: 0.95em;
+        }
+    }
+
+    /*=====================================
+  11. UTILITY CLASSES
+=====================================*/
+
+    /* --- 11.1 Display Utilities --- */
+    .hidden {
+        display: none !important;
+    }
+
+    .visible {
+        display: block !important;
+    }
+
+    /* --- 11.2 Text Utilities --- */
+    .text-center {
+        text-align: center;
+    }
+
+    .text-left {
+        text-align: left;
+    }
+
+    .text-right {
+        text-align: right;
+    }
+
+    /* --- 11.3 Spacing Utilities --- */
+    .mt-10 {
+        margin-top: 10px;
+    }
+
+    .mt-20 {
+        margin-top: 20px;
+    }
+
+    .mb-10 {
+        margin-bottom: 10px;
+    }
+
+    .mb-20 {
+        margin-bottom: 20px;
+    }
+
+    /* --- 11.4 Flex Utilities --- */
+    .flex {
+        display: flex;
+    }
+
+    .flex-column {
+        flex-direction: column;
+    }
+
+    .flex-center {
+        justify-content: center;
+        align-items: center;
+    }
+
+    .gap-10 {
+        gap: 10px;
+    }
+
+    .gap-20 {
+        gap: 20px;
+    }
+
+    /*=====================================
+  12. ANIMATIONS & TRANSITIONS
+=====================================*/
+
+    /* --- 12.1 Fade In Animation --- */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* --- 12.2 Slide Down Animation --- */
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* --- 12.3 Pulse Animation (for notifications) --- */
+    @keyframes pulse {
+
+        0%,
+        100% {
+            transform: scale(1);
+        }
+
+        50% {
+            transform: scale(1.1);
+        }
+    }
+
+    .pulse {
+        animation: pulse 2s infinite;
+    }
+
+    /* --- 12.4 Smooth Scroll --- */
+    html {
+        scroll-behavior: smooth;
+    }
+
+    /*=====================================
+  13. ACCESSIBILITY IMPROVEMENTS
+=====================================*/
+
+    /* --- 13.1 Focus States --- */
+    a:focus,
+    button:focus,
+    input:focus,
+    textarea:focus {
+        outline: 2px solid #00f7ee;
+        outline-offset: 2px;
+    }
+
+    /* --- 13.2 Skip to Content Link --- */
+    .skip-to-content {
+        position: absolute;
+        top: -40px;
+        left: 0;
+        background: #000;
+        color: #fff;
+        padding: 8px;
+        text-decoration: none;
+        z-index: 1000;
+    }
+
+    .skip-to-content:focus {
+        top: 0;
+    }
+
+    /* --- 13.3 Screen Reader Only --- */
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0;
+    }
+
+    /*=====================================
+  14. PRINT STYLES
+=====================================*/
+    @media print {
+
+        header nav,
+        .search-bar,
+        .utility-group,
+        footer,
+        .edit-bio-btn,
+        .save-btn,
+        .cancel-btn,
+        #edit-location-btn,
+        #save-location-btn {
+            display: none;
+        }
+
+        body {
+            background: white;
+            color: black;
+        }
+
+        .coffee-menu-section form,
+        .study-hub-section form {
+            box-shadow: none;
+            border: 1px solid #000;
+            page-break-inside: avoid;
+        }
+    }
+}
