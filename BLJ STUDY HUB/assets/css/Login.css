@@ -1,0 +1,253 @@
+/* ==========================================================================
+   1. GLOBAL & ROOT STYLES (PREMIUM DARK MODE)
+   ========================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-neon: #a855f7;
+    --secondary-neon: #7c3aed;
+    --accent-gold: #fbbf24;
+    --bg-dark: #0f172a;
+    --glass-bg: rgba(15, 15, 20, 0.85);
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+    --border-glow: rgba(168, 85, 247, 0.4);
+    --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+body {
+    background: radial-gradient(circle at top right, #1e1b4b, #020617);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Poppins', sans-serif;
+    padding: 20px;
+    overflow: hidden;
+}
+
+/* ==========================================================================
+   2. AUTH FORM CONTAINER (GLASSMORPHISM)
+   ========================================================================== */
+.login-form,
+.signUp-form {
+    max-width: 450px;
+    width: 100%;
+    padding: 60px 40px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 32px;
+    border: 1px solid var(--border-glow);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 30px var(--border-glow);
+    animation: authFadeIn 0.8s ease-out;
+    position: relative;
+    z-index: 10;
+}
+
+@keyframes authFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* --- CENTERED BRAND LOGO --- */
+.auth-logo {
+    display: block;
+    width: 120px;
+    height: 120px;
+    margin: -30px auto 30px;
+    /* Pulls logo slightly out of container for premium look */
+    object-fit: cover;
+    border-radius: 50%;
+    border: 4px solid var(--primary-neon);
+    box-shadow: 0 0 25px var(--border-glow);
+    transition: var(--transition);
+}
+
+.auth-logo:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 0 40px var(--primary-neon);
+}
+
+h2 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 35px;
+    background: linear-gradient(to right, #fff, var(--primary-neon));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.5px;
+}
+
+/* ==========================================================================
+   3. INPUT GROUPS
+   ========================================================================== */
+.input-group {
+    margin-bottom: 25px;
+}
+
+.input-group label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--primary-neon);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    padding-left: 5px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 18px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    color: white;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.input-group input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--primary-neon);
+    box-shadow: 0 0 20px var(--border-glow);
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   4. BUTTONS
+   ========================================================================== */
+button[type="submit"] {
+    width: 100%;
+    padding: 18px;
+    background: linear-gradient(135deg, var(--primary-neon), var(--secondary-neon));
+    color: white;
+    border: none;
+    border-radius: 16px;
+    font-size: 1.1rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(168, 85, 247, 0.4);
+    transition: var(--transition);
+    margin-top: 10px;
+}
+
+button[type="submit"]:hover {
+    transform: translateY(-5px);
+    filter: brightness(1.2);
+    box-shadow: 0 15px 40px rgba(168, 85, 247, 0.6);
+}
+
+button[type="submit"]:active {
+    transform: translateY(1px);
+}
+
+/* ==========================================================================
+   5. SOCIAL & LINKS
+   ========================================================================== */
+.divider {
+    display: flex;
+    align-items: center;
+    margin: 30px 0;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.divider span {
+    padding: 0 15px;
+}
+
+.social-login {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+.social-login a {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: white;
+    font-size: 1.5rem;
+    transition: var(--transition);
+    text-decoration: none;
+}
+
+.social-login a:hover {
+    background: var(--primary-neon);
+    color: white;
+    transform: translateY(-5px) rotate(8deg);
+    box-shadow: 0 10px 20px var(--border-glow);
+}
+
+.signup-link,
+.login-link,
+.back-link {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.signup-link a,
+.login-link a,
+.back-link a {
+    color: var(--accent-gold);
+    text-decoration: none;
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+.signup-link a:hover,
+.login-link a:hover {
+    color: white;
+    text-shadow: 0 0 10px var(--accent-gold);
+}
+
+/* ==========================================================================
+   6. RESPONSIVE
+   ========================================================================== */
+@media (max-width: 500px) {
+
+    .login-form,
+    .signUp-form {
+        padding: 40px 25px;
+        border-radius: 24px;
+    }
+
+    h2 {
+        font-size: 1.6rem;
+    }
+}
