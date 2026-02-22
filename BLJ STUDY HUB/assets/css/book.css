@@ -1,0 +1,237 @@
+/* ==========================================================================
+   1. VARIABLES & RESET
+   ========================================================================== */
+:root {
+    --primary-neon: #a855f7;
+    --secondary-neon: #7c3aed;
+    --accent-gold: #fbbf24;
+    --glass-bg: rgba(15, 15, 20, 0.9);
+    --border-glow: rgba(168, 85, 247, 0.4);
+    --text-main: #f8fafc;
+}
+
+body {
+    background: radial-gradient(circle at top right, #1e1b4b, #020617);
+    color: var(--text-main);
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+/* ==========================================================================
+   2. HEADER STYLING
+   ========================================================================== */
+header {
+    text-align: center;
+    margin-bottom: 40px;
+    border-radius: 12px;
+    background: var(--glass-bg);
+    border: 1px solid var(--border-glow);
+    padding: 20px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+header h1 {
+    color: var(--primary-neon);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 15px var(--primary-neon);
+}
+
+/* ==========================================================================
+   2. ANIMATIONS
+   ========================================================================== */
+@keyframes glowPulse {
+    from {
+        box-shadow: 0 0 10px rgba(168, 85, 247, 0.1);
+    }
+
+    to {
+        box-shadow: 0 0 25px rgba(168, 85, 247, 0.3);
+    }
+}
+
+/* ==========================================================================
+   2. nav-icons
+   ========================================================================== */
+.nav-icons {
+    list-style: none;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    display: flex;
+    gap: 15px;
+}
+
+.nav-icons i {
+    color: var(--primary-neon);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.2s, color 0.3s;
+}
+
+.nav-icons i:hover {
+    transform: scale(1.2);
+    color: var(--accent-gold);
+}
+
+/* ==========================================================================
+   2. LAYOUT CONTAINERS
+   ========================================================================== */
+.booking-container {
+    max-width: 700px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+.booking-card {
+    background: var(--glass-bg);
+    border: 2px solid var(--border-glow);
+    border-radius: 30px;
+    padding: 50px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+    animation: glowPulse 3s infinite alternate;
+    text-align: center;
+    /* Centers the titles */
+}
+
+.booking-card h2 {
+    color: var(--primary-neon);
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    text-shadow: 0 0 15px var(--primary-neon);
+}
+
+.booking-card p {
+    color: #94a3b8;
+    margin-bottom: 40px;
+}
+
+/* ==========================================================================
+   3. FORM ELEMENTS - ARRANGED NEATLY
+   ========================================================================== */
+form#bookingForm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    /* FORCES label on top */
+    align-items: flex-start;
+    /* Aligns contents to the left within the group */
+    width: 100%;
+}
+
+.input-group label {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: var(--primary-neon);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    text-align: left;
+}
+
+.input-group input,
+.input-group select {
+    width: 100% !important;
+    /* Force full width */
+    display: block;
+    padding: 16px 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #4a4646aa;
+    outline: none;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: 0.3s all ease;
+    box-sizing: border-box;
+    /* Ensures padding doesn't break width */
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    border-color: var(--primary-neon);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 20px var(--border-glow);
+}
+
+/* Row Arrangement */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    width: 100%;
+}
+
+/* Dropdown Neon Arrow */
+select {
+    appearance: none;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%23a855f7'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 20px center;
+    background-size: 20px;
+}
+
+select option {
+    background: #0f172a;
+    color: white;
+}
+
+/* ==========================================================================
+   4. BUTTON STYLING - CENTERED & LARGE
+   ========================================================================== */
+.booking-submit {
+    width: 100%;
+    padding: 20px;
+    background: linear-gradient(135deg, var(--primary-neon), var(--secondary-neon));
+    border: none;
+    border-radius: 15px;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    margin-top: 20px;
+    box-shadow: 0 10px 30px rgba(168, 85, 247, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+.booking-submit:hover {
+    transform: translateY(-5px);
+    filter: brightness(1.2);
+    box-shadow: 0 15px 40px rgba(168, 85, 247, 0.6);
+}
+
+.booking-submit:active {
+    transform: translateY(0);
+}
+
+/* ==========================================================================
+   5. RESPONSIVE
+   ========================================================================== */
+@media (max-width: 600px) {
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .booking-card {
+        padding: 30px 20px;
+    }
+}

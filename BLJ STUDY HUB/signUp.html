@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/signUp.css">
+    <link rel="icon" href="assets/image/Gemini.png">
+    <title>sign up</title>
+</head>
+
+<body>
+    <section class="signUp-form">
+        <img src="assets/image/Gemini.png" alt="BLJ Logo" style="
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-60%, -10%);
+            justify-content: center;
+            align-items: center;
+            padding: 100px auto;
+            width: 100px; 
+            height: 100px; 
+            object-fit: cover; 
+            border-radius: 50%; 
+            border: 4px solid black; 
+            margin: 10px; 
+            display: flex; 
+            vertical-align: center;
+            ">
+        <h2> Sign Up </h2>
+        <form id="signUpForm" action="php/signup.php" method="POST">
+            <div class="input-group">
+                <label for="newName">Name:</label>
+                <input type="text" id="newName" name="newName" required>
+                <label for="lastname">lastname</label>
+                <input type="text" id="lastname" name="lastname" required>
+            </div>
+            <div class="input-group">
+                <label for="newUsername">Username:</label>
+                <input type="text" id="newUsername" name="newUsername" required>
+            </div>
+            <div class="input-group">
+                <label for="newPassword">Password:</label>
+                <input type="password" id="newPassword" name="newPassword" required>
+            </div>
+            <button type="submit">Sign Up</button>
+            <p class="login-link">Already have an account? <a href="Login.html">Login</a></p>
+        </form>
+        <div class="divider">
+            <span>Or sign up with</span>
+        </div>
+
+        <div class="social-login">
+            <a href="#" aria-label="Sign Up with Google">
+                <i class="fa-brands fa-google"></i>
+            </a>
+            <a href="#" aria-label="Sign Up with Facebook">
+                <i class="fa-brands fa-facebook"></i>
+            </a>
+            <a href="#" aria-label="Sign Up with Twitter">
+                <i class="fa-brands fa-twitter"></i>
+            </a>
+        </div>
+</body>
+
+</html>

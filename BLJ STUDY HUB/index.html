@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="assets/image/Gemini.png">
+    <title>BLJ Study Hub & Cafe</title>
+</head>
+
+<body>
+
+    <header>
+        <h1 class="title"><i class="fas fa-book"></i> BLJ Study Hub & Cafe</h1>
+        <div class="live-clock" id="liveClock">00:00:00 AM</div>
+
+        <nav>
+            <ul class="nav-icons">
+                <li class="search-item">
+                    <div class="search-box">
+                        <input type="text" placeholder="Search...">
+                        <button type="submit"><i class="fas fa-search"></i></button>
+                    </div>
+                </li>
+                <li><button class="dark-mode-toggle" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button></li>
+                <li><a id="cart" class="Cart" title="cart" href="cart.html"><i class="fas fa-shopping-cart"></i></a>
+                </li>
+                <li><a href="book.html"><i class="fas fa-calendar-check"></i></a></li>
+                <li><a href="index.html" title="Home"><i class="fas fa-home"></i></a></li>
+                <li><a href="Login.html" title="Login"><i class="fas fa-sign-in-alt"></i></a></li>
+                <li><a href="signUp.html" title="Sign Up"><i class="fas fa-user-plus"></i></a></li>
+                <li><a href="php/logout.php" onclick="return confirm('Are you sure you want to logout?')"
+                        title="Logout"><i class="fas fa-sign-out-alt"></i></a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="content">
+        <section class="welcome-text" id="welcome">
+            <h2>Welcome to the BLJ Study Hub</h2>
+            <p>Your one-stop destination for all your study needs.</p>
+            <div class="calendar" id="calendar">Monday, Jan 12, 2026</div>
+        </section>
+
+        <div class="product-container">
+
+            <section class="menu-category" id="coffee-category" style="display:none;">
+                <h2 class="category-title"><i class="fas fa-coffee"></i> Coffee Menu</h2>
+                <ul class="product-list" id="coffee-list">
+                    <!-- Dynamic products will load here -->
+                </ul>
+            </section>
+
+            <section class="menu-category" id="snack-category" style="display:none;">
+                <h2 class="category-title"><i class="fas fa-cookie"></i> Snack Menu</h2>
+                <ul class="product-list" id="snack-list">
+                    <!-- Dynamic products will load here -->
+                </ul>
+            </section>
+
+            <section class="menu-category" id="study-category" style="display:none;">
+                <h2 class="category-title"><i class="fas fa-laptop-house"></i> Study Hub</h2>
+                <ul class="product-list" id="study-list">
+                    <!-- Dynamic products will load here -->
+                </ul>
+            </section>
+
+            <section class="menu-category" id="wifi-category" style="display:none;">
+                <h2 class="category-title"><i class="fas fa-wifi"></i> Wifi Area</h2>
+                <ul class="product-list" id="wifi-list">
+                    <!-- Dynamic products will load here -->
+                </ul>
+            </section>
+
+            <section class="menu-category" id="printing-category" style="display:none;">
+                <h2 class="category-title"><i class="fas fa-print"></i> Printing & Charging</h2>
+                <ul class="product-list" id="printing-list">
+                    <!-- Dynamic products will load here -->
+                </ul>
+            </section>
+
+            <section class="menu-category" id="amenities-category" style="display:none;">
+                <h2 class="category-title"><i class="fas fa-door-open"></i> Amenities</h2>
+                <ul class="product-list" id="amenities-list">
+                    <!-- Dynamic products will load here -->
+                </ul>
+            </section>
+
+            <section class="menu-category" id="lounge-category" style="display:none;">
+                <h2 class="category-title"><i class="fas fa-smoking"></i> Smoking & Lounge</h2>
+                <ul class="product-list" id="lounge-list">
+                    <!-- Dynamic products will load here -->
+                </ul>
+            </section>
+        </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 BLJ Study Hub & Cafe. All rights reserved.</p>
+        <p style="margin-top: 10px; font-size: 0.8rem; opacity: 0.5;"><a href="admin-login.html"
+                style="color: inherit; text-decoration: none;">Admin Access</a></p>
+    </footer>
+
+    <button id="scrollToBottomBtn" title="Go to bottom"><i class="fas fa-arrow-down"></i></button>
+    <button id="scrollToTopBtn" title="Go to top"><i class="fas fa-arrow-up"></i></button>
+
+    <script src="assets/js/script.js"></script>
+</body>
+
+</html>
